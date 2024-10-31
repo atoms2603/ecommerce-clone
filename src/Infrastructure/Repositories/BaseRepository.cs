@@ -10,11 +10,6 @@ public class BaseRepository<TEntity>(AppDbContext context) : IBaseRepository<TEn
     protected readonly AppDbContext _context = context;
     protected readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
-    public IQueryable<TEntity> GetQuery()
-    {
-        return _dbSet.Where(x => !x.IsDeleted);
-    }
-
     public IQueryable<TEntity> GetQuery(Expression<Func<TEntity, bool>>? predicate = null)
     {
         var query = _dbSet.Where(x => !x.IsDeleted);
@@ -28,7 +23,7 @@ public class BaseRepository<TEntity>(AppDbContext context) : IBaseRepository<TEn
 
     public async Task<TEntity?> GetByIdAsync(Guid id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _dbSet.FindAsync(id).ConfigureAwait(false);
     }
 
     public async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -51,44 +46,77 @@ public class BaseRepository<TEntity>(AppDbContext context) : IBaseRepository<TEn
         return await _dbSet.AnyAsync(predicate).ConfigureAwait(false);
     }
 
-    public async Task InsertAsync(TEntity entity)
+    public async Task InsertAsync(TEntity entity, Guid? createdBy = null)
     {
-        await _dbSet.AddAsync(entity);
+        if (entity == null) return;
+
+        entity.CreatedBy = createdBy ?? Guid.Empty;
+        await _dbSet.AddAsync(entity).ConfigureAwait(false);
         await this.SaveChangesAsync();
     }
 
-    public async Task BulkInsertAsync(List<TEntity> entities)
+    public async Task BulkInsertAsync(List<TEntity> entities, Guid? createdBy = null)
     {
-        await _dbSet.AddRangeAsync(entities);
+        if (entities == null || entities.Count == 0) return;
+        foreach (TEntity entity in entities)
+        {
+            entity.CreatedBy = createdBy ?? Guid.Empty;
+        }
+        await _dbSet.AddRangeAsync(entities).ConfigureAwait(false);
         await this.SaveChangesAsync();
     }
 
-    public async Task Update(TEntity entity)
+    public async Task Update(TEntity entity, Guid? modifiedBy = null)
     {
+        if (entity == null) return;
+
+        entity.ModifiedBy = modifiedBy;
+        entity.ModifiedDate = DateTime.UtcNow;
         _dbSet.Update(entity);
         await this.SaveChangesAsync();
     }
 
-    public async Task BulkUpdate(List<TEntity> entities)
+    public async Task BulkUpdate(List<TEntity> entities, Guid? modifiedBy = null)
     {
+        if (entities == null || entities.Count == 0) return;
+        foreach (TEntity entity in entities)
+        {
+            entity.ModifiedBy = modifiedBy;
+            entity.ModifiedDate = DateTime.UtcNow;
+        }
+
         _dbSet.UpdateRange(entities);
         await this.SaveChangesAsync();
     }
 
-    public async Task Delete(TEntity entity)
+    public async Task Delete(TEntity entity, Guid? deletedBy = null)
     {
-        _dbSet.Remove(entity);
+        if (entity == null) return;
+
+        entity.IsDeleted = true;
+        entity.DeletedBy = deletedBy;
+        entity.DeletedDate = DateTime.UtcNow;
+        _dbSet.Update(entity);
         await this.SaveChangesAsync();
     }
 
-    public async Task BulkDelete(List<TEntity> entities)
+    public async Task BulkDelete(List<TEntity> entities, Guid? deletedBy = null)
     {
-        _dbSet.RemoveRange(entities);
+        if (entities == null || entities.Count == 0) return;
+
+        foreach (TEntity entity in entities)
+        {
+            _dbSet.Entry(entity).State = EntityState.Deleted;
+            entity.IsDeleted = true;
+            entity.DeletedBy = deletedBy;
+            entity.DeletedDate = DateTime.UtcNow;
+        }
+        _dbSet.UpdateRange(entities);
         await this.SaveChangesAsync();
     }
 
     public async Task<int> SaveChangesAsync()
     {
-        return await _context.SaveChangesAsync();
+        return await _context.SaveChangesAsync().ConfigureAwait(false);
     }
 }
