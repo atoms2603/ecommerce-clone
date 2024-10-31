@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Threading;
 
 namespace Infrastructure.Repositories;
 
@@ -32,7 +33,22 @@ public class BaseRepository<TEntity>(AppDbContext context) : IBaseRepository<TEn
 
     public async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        return await _dbSet.ToListAsync().ConfigureAwait(false);
+    }
+
+    public async Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null)
+    {
+        if (predicate != null)
+        {
+            return await _dbSet.CountAsync(predicate).ConfigureAwait(false);
+        }
+
+        return await _dbSet.CountAsync().ConfigureAwait(false);
+    }
+
+    public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await _dbSet.AnyAsync(predicate).ConfigureAwait(false);
     }
 
     public async Task InsertAsync(TEntity entity)
