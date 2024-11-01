@@ -27,7 +27,7 @@ namespace Entities.Entities
     {
         public override void Configure(EntityTypeBuilder<Transaction> builder)
         {
-            builder.HasOne<User>().WithMany(x => x.Transactions).HasForeignKey(x => x.UserId);  
+            builder.HasOne(x => x.User).WithMany(x => x.Transactions).HasForeignKey(x => x.UserId);  
             builder.Property(x => x.Type).IsRequired();
             builder.Property(x => x.Amount).IsRequired();
 

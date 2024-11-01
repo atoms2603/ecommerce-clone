@@ -6,7 +6,6 @@ namespace Entities.Entities
     public class OrderDetail : BaseEntity
     {
         public Guid OrderId { get; set; }
-
         public Guid ProductId { get; set; }
         public Guid ProductPropertyId { get; set; }
         public required string ProductName { get; set; }
@@ -23,8 +22,7 @@ namespace Entities.Entities
     {
         public override void Configure(EntityTypeBuilder<OrderDetail> builder)
         {
-            builder.HasOne<Order>().WithMany(x => x.OrderDetails).HasForeignKey(x => x.OrderId);
-
+            builder.HasOne(x => x.Order).WithMany(x => x.OrderDetails).HasForeignKey(x => x.OrderId);
             builder.Property(e => e.ProductName).IsRequired();
             builder.Property(e => e.Price).IsRequired();
             builder.Property(e => e.DefaultImageUri).IsRequired();

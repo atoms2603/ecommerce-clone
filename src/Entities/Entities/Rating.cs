@@ -24,8 +24,8 @@ namespace Entities.Entities
     {
         public override void Configure(EntityTypeBuilder<Rating> builder)
         {
-            builder.HasOne<User>().WithMany(x => x.Ratings).HasForeignKey(x => x.UserId);
-            builder.HasOne<Product>().WithMany(x => x.Ratings).HasForeignKey(x => x.ProductId);
+            builder.HasOne(x => x.User).WithMany(x => x.Ratings).HasForeignKey(x => x.UserId);
+            builder.HasOne(x => x.Product).WithMany(x => x.Ratings).HasForeignKey(x => x.ProductId);
 
             builder.Property(x => x.Description).IsRequired(false);
             builder.Property(x => x.RatePoint).IsRequired();

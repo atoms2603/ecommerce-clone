@@ -24,9 +24,8 @@ namespace Entities.Entities
             builder.Property(p => p.Description).IsRequired(false);
             builder.Property(p => p.Price).IsRequired();
             builder.Property(p => p.Remaining).IsRequired();
-
-            builder.HasOne<Product>().WithMany(x => x.ProductProperties).HasForeignKey(x => x.ProductId);
-            builder.HasOne<ProductImage>().WithOne(x => x.ProductProperty).HasForeignKey<ProductProperty>(x => x.ProductImageId);
+            builder.HasOne(x => x.Product).WithMany(x => x.ProductProperties).HasForeignKey(x => x.ProductId);
+            builder.HasOne(x => x.ProductImage).WithOne(x => x.ProductProperty).HasForeignKey<ProductProperty>(x => x.ProductImageId);
 
             base.Configure(builder);
         }

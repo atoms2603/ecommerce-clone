@@ -23,10 +23,9 @@ namespace Entities.Entities
     {
         public override void Configure(EntityTypeBuilder<ProductImage> builder)
         {
-            builder.HasOne<MediaFile>().WithMany().HasForeignKey(x => x.MediaFileId);
-            builder.HasOne<Product>().WithMany(x => x.ProductImages).HasForeignKey(x => x.ProductId);
-            builder.HasOne<ProductProperty>().WithOne(x => x.ProductImage).HasForeignKey<ProductImage>(x => x.ProductPropertyId);
-
+            builder.HasOne(x => x.MediaFile).WithMany().HasForeignKey(x => x.MediaFileId);
+            builder.HasOne(x => x.Product).WithMany(x => x.ProductImages).HasForeignKey(x => x.ProductId);
+            builder.HasOne(x => x.ProductProperty).WithOne(x => x.ProductImage).HasForeignKey<ProductImage>(x => x.ProductPropertyId);
             builder.Property(x => x.Position).IsRequired(); 
 
             base.Configure(builder);

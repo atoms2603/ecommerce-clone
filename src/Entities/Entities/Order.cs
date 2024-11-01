@@ -44,9 +44,8 @@ namespace Entities.Entities
     {
         public override void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.HasOne<User>().WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
-            builder.HasOne<Seller>().WithMany(x => x.Orders).HasForeignKey(x => x.SellerId);
-
+            builder.HasOne(x => x.User).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
+            builder.HasOne(x => x.Seller).WithMany(x => x.Orders).HasForeignKey(x => x.SellerId);
             builder.Property(e => e.OrderCode).IsRequired();
             builder.Property(e => e.CustomerName).IsRequired();
             builder.Property(e => e.Address).IsRequired();

@@ -35,8 +35,7 @@ namespace Entities.Entities
             builder.Property(x => x.Amount).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.Type).IsRequired();
-
-            builder.HasOne<Order>().WithMany(x => x.Payments).HasForeignKey(x => x.OrderId);
+            builder.HasOne(x => x.Order).WithMany(x => x.Payments).HasForeignKey(x => x.OrderId);
 
             base.Configure(builder);
         }

@@ -260,12 +260,6 @@ namespace Api.Migrations
                     b.Property<Guid>("SellerId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("SellerId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("SellerId2")
-                        .HasColumnType("uuid");
-
                     b.Property<double>("ShippingFee")
                         .HasColumnType("double precision");
 
@@ -278,12 +272,6 @@ namespace Api.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId2")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
@@ -294,11 +282,7 @@ namespace Api.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.HasIndex("SellerId1");
-
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Orders");
                 });
@@ -344,12 +328,6 @@ namespace Api.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("OrderId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OrderId2")
-                        .HasColumnType("uuid");
-
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
@@ -378,8 +356,6 @@ namespace Api.Migrations
                     b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("OrderId1");
 
                     b.ToTable("OrderDetails");
                 });
@@ -421,12 +397,6 @@ namespace Api.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("OrderId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OrderId2")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
@@ -442,8 +412,6 @@ namespace Api.Migrations
                     b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("OrderId1");
 
                     b.ToTable("Payments");
                 });
@@ -591,9 +559,6 @@ namespace Api.Migrations
                     b.Property<Guid>("MediaFileId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MediaFileId1")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uuid");
 
@@ -610,9 +575,6 @@ namespace Api.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProductId1")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid?>("ProductPropertyId")
                         .HasColumnType("uuid");
 
@@ -624,16 +586,9 @@ namespace Api.Migrations
 
                     b.HasIndex("MediaFileId");
 
-                    b.HasIndex("MediaFileId1");
-
                     b.HasIndex("ModifiedBy");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("ProductId1");
-
-                    b.HasIndex("ProductPropertyId")
-                        .IsUnique();
 
                     b.ToTable("ProductImages");
                 });
@@ -682,12 +637,6 @@ namespace Api.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProductId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductId2")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("ProductImageId")
                         .HasColumnType("uuid");
 
@@ -703,8 +652,6 @@ namespace Api.Migrations
                     b.HasIndex("ModifiedBy");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("ProductId1");
 
                     b.HasIndex("ProductImageId")
                         .IsUnique();
@@ -806,16 +753,10 @@ namespace Api.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProductId1")
-                        .HasColumnType("uuid");
-
                     b.Property<double>("RatePoint")
                         .HasColumnType("double precision");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId1")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -828,11 +769,7 @@ namespace Api.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductId1");
-
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Ratings");
                 });
@@ -861,9 +798,6 @@ namespace Api.Migrations
                     b.Property<Guid>("MediaFileId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MediaFileId1")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uuid");
 
@@ -877,9 +811,6 @@ namespace Api.Migrations
                     b.Property<Guid>("RatingId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("RatingId1")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
@@ -888,13 +819,9 @@ namespace Api.Migrations
 
                     b.HasIndex("MediaFileId");
 
-                    b.HasIndex("MediaFileId1");
-
                     b.HasIndex("ModifiedBy");
 
                     b.HasIndex("RatingId");
-
-                    b.HasIndex("RatingId1");
 
                     b.ToTable("RatingImages");
                 });
@@ -1057,12 +984,6 @@ namespace Api.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId2")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
@@ -1072,8 +993,6 @@ namespace Api.Migrations
                     b.HasIndex("ModifiedBy");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Transactions");
                 });
@@ -1183,27 +1102,15 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Entities.Order", b =>
                 {
-                    b.HasOne("Entities.Entities.Seller", null)
+                    b.HasOne("Entities.Entities.Seller", "Seller")
                         .WithMany("Orders")
                         .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Entities.Seller", "Seller")
-                        .WithMany()
-                        .HasForeignKey("SellerId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.User", null)
+                    b.HasOne("Entities.Entities.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1214,15 +1121,9 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Entities.OrderDetail", b =>
                 {
-                    b.HasOne("Entities.Entities.Order", null)
+                    b.HasOne("Entities.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1231,15 +1132,9 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Entities.Payment", b =>
                 {
-                    b.HasOne("Entities.Entities.Order", null)
+                    b.HasOne("Entities.Entities.Order", "Order")
                         .WithMany("Payments")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1278,33 +1173,17 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Entities.ProductImage", b =>
                 {
-                    b.HasOne("Entities.Entities.MediaFile", null)
+                    b.HasOne("Entities.Entities.MediaFile", "MediaFile")
                         .WithMany()
                         .HasForeignKey("MediaFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Entities.MediaFile", "MediaFile")
-                        .WithMany()
-                        .HasForeignKey("MediaFileId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.Product", null)
+                    b.HasOne("Entities.Entities.Product", "Product")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Entities.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.ProductProperty", null)
-                        .WithOne("ProductImage")
-                        .HasForeignKey("Entities.Entities.ProductImage", "ProductPropertyId");
 
                     b.Navigation("MediaFile");
 
@@ -1313,50 +1192,34 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Entities.ProductProperty", b =>
                 {
-                    b.HasOne("Entities.Entities.Product", null)
+                    b.HasOne("Entities.Entities.Product", "Product")
                         .WithMany("ProductProperties")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.ProductImage", null)
+                    b.HasOne("Entities.Entities.ProductImage", "ProductImage")
                         .WithOne("ProductProperty")
                         .HasForeignKey("Entities.Entities.ProductProperty", "ProductImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("ProductImage");
                 });
 
             modelBuilder.Entity("Entities.Entities.Rating", b =>
                 {
-                    b.HasOne("Entities.Entities.Product", null)
+                    b.HasOne("Entities.Entities.Product", "Product")
                         .WithMany("Ratings")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.User", null)
+                    b.HasOne("Entities.Entities.User", "User")
                         .WithMany("Ratings")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1367,27 +1230,15 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Entities.RatingImage", b =>
                 {
-                    b.HasOne("Entities.Entities.MediaFile", null)
+                    b.HasOne("Entities.Entities.MediaFile", "MediaFile")
                         .WithMany()
                         .HasForeignKey("MediaFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Entities.MediaFile", "MediaFile")
-                        .WithMany()
-                        .HasForeignKey("MediaFileId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.Rating", null)
+                    b.HasOne("Entities.Entities.Rating", "Rating")
                         .WithMany("RatingImages")
                         .HasForeignKey("RatingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.Rating", "Rating")
-                        .WithMany()
-                        .HasForeignKey("RatingId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1436,15 +1287,9 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Entities.Transaction", b =>
                 {
-                    b.HasOne("Entities.Entities.User", null)
+                    b.HasOne("Entities.Entities.User", "User")
                         .WithMany("Transactions")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1479,12 +1324,6 @@ namespace Api.Migrations
             modelBuilder.Entity("Entities.Entities.ProductImage", b =>
                 {
                     b.Navigation("ProductProperty");
-                });
-
-            modelBuilder.Entity("Entities.Entities.ProductProperty", b =>
-                {
-                    b.Navigation("ProductImage")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.Entities.Province", b =>

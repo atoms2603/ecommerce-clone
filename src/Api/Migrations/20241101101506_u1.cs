@@ -190,8 +190,6 @@ namespace Api.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Amount = table.Column<double>(type: "double precision", nullable: false),
-                    UserId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId2 = table.Column<Guid>(type: "uuid", nullable: false),
                     No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -207,12 +205,6 @@ namespace Api.Migrations
                     table.ForeignKey(
                         name: "FK_Transactions_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Transactions_Users_UserId1",
-                        column: x => x.UserId1,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -235,10 +227,6 @@ namespace Api.Migrations
                     ShippingFee = table.Column<double>(type: "double precision", nullable: false),
                     ItemQuantity = table.Column<int>(type: "integer", nullable: false),
                     Note = table.Column<string>(type: "text", nullable: true),
-                    UserId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    SellerId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    SellerId2 = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId2 = table.Column<Guid>(type: "uuid", nullable: false),
                     No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -258,20 +246,8 @@ namespace Api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Sellers_SellerId1",
-                        column: x => x.SellerId1,
-                        principalTable: "Sellers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Orders_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_Users_UserId1",
-                        column: x => x.UserId1,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -356,8 +332,6 @@ namespace Api.Migrations
                     Quantity = table.Column<int>(type: "integer", nullable: false),
                     TotalAmount = table.Column<double>(type: "double precision", nullable: false),
                     Note = table.Column<string>(type: "text", nullable: true),
-                    OrderId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId2 = table.Column<Guid>(type: "uuid", nullable: false),
                     No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -376,12 +350,6 @@ namespace Api.Migrations
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_OrderId1",
-                        column: x => x.OrderId1,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -393,8 +361,6 @@ namespace Api.Migrations
                     Amount = table.Column<double>(type: "double precision", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    OrderId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId2 = table.Column<Guid>(type: "uuid", nullable: false),
                     No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -410,12 +376,6 @@ namespace Api.Migrations
                     table.ForeignKey(
                         name: "FK_Payments_Orders_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Payments_Orders_OrderId1",
-                        column: x => x.OrderId1,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -455,102 +415,6 @@ namespace Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    RatePoint = table.Column<double>(type: "double precision", nullable: false),
-                    UserId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Products_ProductId1",
-                        column: x => x.ProductId1,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Users_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RatingImages",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    MediaFileId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RatingId = table.Column<Guid>(type: "uuid", nullable: false),
-                    MediaFileId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    RatingId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RatingImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RatingImages_MediaFiles_MediaFileId",
-                        column: x => x.MediaFileId,
-                        principalTable: "MediaFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RatingImages_MediaFiles_MediaFileId1",
-                        column: x => x.MediaFileId1,
-                        principalTable: "MediaFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RatingImages_Ratings_RatingId",
-                        column: x => x.RatingId,
-                        principalTable: "Ratings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RatingImages_Ratings_RatingId1",
-                        column: x => x.RatingId1,
-                        principalTable: "Ratings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProductImages",
                 columns: table => new
                 {
@@ -559,8 +423,6 @@ namespace Api.Migrations
                     ProductId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProductPropertyId = table.Column<Guid>(type: "uuid", nullable: true),
                     Position = table.Column<int>(type: "integer", nullable: false),
-                    MediaFileId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductId1 = table.Column<Guid>(type: "uuid", nullable: false),
                     No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -580,21 +442,44 @@ namespace Api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductImages_MediaFiles_MediaFileId1",
-                        column: x => x.MediaFileId1,
-                        principalTable: "MediaFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_ProductImages_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    RatePoint = table.Column<double>(type: "double precision", nullable: false),
+                    No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductImages_Products_ProductId1",
-                        column: x => x.ProductId1,
+                        name: "FK_Ratings_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -610,8 +495,6 @@ namespace Api.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<double>(type: "double precision", nullable: false),
                     Remaining = table.Column<int>(type: "integer", nullable: false),
-                    ProductId1 = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductId2 = table.Column<Guid>(type: "uuid", nullable: false),
                     No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -636,10 +519,37 @@ namespace Api.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RatingImages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    MediaFileId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RatingId = table.Column<Guid>(type: "uuid", nullable: false),
+                    No = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RatingImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductProperties_Products_ProductId1",
-                        column: x => x.ProductId1,
-                        principalTable: "Products",
+                        name: "FK_RatingImages_MediaFiles_MediaFileId",
+                        column: x => x.MediaFileId,
+                        principalTable: "MediaFiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RatingImages_Ratings_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "Ratings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -715,11 +625,6 @@ namespace Api.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrderId1",
-                table: "OrderDetails",
-                column: "OrderId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CreatedBy",
                 table: "Orders",
                 column: "CreatedBy");
@@ -740,19 +645,9 @@ namespace Api.Migrations
                 column: "SellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_SellerId1",
-                table: "Orders",
-                column: "SellerId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_UserId1",
-                table: "Orders",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_CreatedBy",
@@ -773,11 +668,6 @@ namespace Api.Migrations
                 name: "IX_Payments_OrderId",
                 table: "Payments",
                 column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payments_OrderId1",
-                table: "Payments",
-                column: "OrderId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductFilterTags_CreatedBy",
@@ -820,11 +710,6 @@ namespace Api.Migrations
                 column: "MediaFileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductImages_MediaFileId1",
-                table: "ProductImages",
-                column: "MediaFileId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ModifiedBy",
                 table: "ProductImages",
                 column: "ModifiedBy");
@@ -833,17 +718,6 @@ namespace Api.Migrations
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductImages_ProductId1",
-                table: "ProductImages",
-                column: "ProductId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductImages_ProductPropertyId",
-                table: "ProductImages",
-                column: "ProductPropertyId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductProperties_CreatedBy",
@@ -864,11 +738,6 @@ namespace Api.Migrations
                 name: "IX_ProductProperties_ProductId",
                 table: "ProductProperties",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductProperties_ProductId1",
-                table: "ProductProperties",
-                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductProperties_ProductImageId",
@@ -927,11 +796,6 @@ namespace Api.Migrations
                 column: "MediaFileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RatingImages_MediaFileId1",
-                table: "RatingImages",
-                column: "MediaFileId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RatingImages_ModifiedBy",
                 table: "RatingImages",
                 column: "ModifiedBy");
@@ -940,11 +804,6 @@ namespace Api.Migrations
                 name: "IX_RatingImages_RatingId",
                 table: "RatingImages",
                 column: "RatingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RatingImages_RatingId1",
-                table: "RatingImages",
-                column: "RatingId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_CreatedBy",
@@ -967,19 +826,9 @@ namespace Api.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_ProductId1",
-                table: "Ratings",
-                column: "ProductId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Ratings_UserId",
                 table: "Ratings",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ratings_UserId1",
-                table: "Ratings",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SellerFilterTags_CreatedBy",
@@ -1052,11 +901,6 @@ namespace Api.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_UserId1",
-                table: "Transactions",
-                column: "UserId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Users_CreatedBy",
                 table: "Users",
                 column: "CreatedBy");
@@ -1070,54 +914,11 @@ namespace Api.Migrations
                 name: "IX_Users_ModifiedBy",
                 table: "Users",
                 column: "ModifiedBy");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_ProductImages_ProductProperties_ProductPropertyId",
-                table: "ProductImages",
-                column: "ProductPropertyId",
-                principalTable: "ProductProperties",
-                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Sellers_Provinces_ProvinceId",
-                table: "Sellers");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Products_Sellers_SellerId",
-                table: "Products");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductImages_Products_ProductId",
-                table: "ProductImages");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductImages_Products_ProductId1",
-                table: "ProductImages");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductProperties_Products_ProductId",
-                table: "ProductProperties");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductProperties_Products_ProductId1",
-                table: "ProductProperties");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductImages_MediaFiles_MediaFileId",
-                table: "ProductImages");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductImages_MediaFiles_MediaFileId1",
-                table: "ProductImages");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ProductImages_ProductProperties_ProductPropertyId",
-                table: "ProductImages");
-
             migrationBuilder.DropTable(
                 name: "Districts");
 
@@ -1129,6 +930,9 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductFilterTags");
+
+            migrationBuilder.DropTable(
+                name: "ProductProperties");
 
             migrationBuilder.DropTable(
                 name: "RatingImages");
@@ -1143,31 +947,28 @@ namespace Api.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
+                name: "ProductImages");
+
+            migrationBuilder.DropTable(
                 name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "FilterTags");
 
             migrationBuilder.DropTable(
-                name: "Provinces");
-
-            migrationBuilder.DropTable(
-                name: "Sellers");
-
-            migrationBuilder.DropTable(
-                name: "Users");
+                name: "MediaFiles");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "MediaFiles");
+                name: "Sellers");
 
             migrationBuilder.DropTable(
-                name: "ProductProperties");
+                name: "Provinces");
 
             migrationBuilder.DropTable(
-                name: "ProductImages");
+                name: "Users");
         }
     }
 }
