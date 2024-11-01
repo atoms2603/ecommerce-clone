@@ -23,6 +23,7 @@ namespace Entities.Entities
         public virtual ICollection<ProductProperty> ProductProperties { get; set; } = new List<ProductProperty>();
         public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
         public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+        public virtual ICollection<ProductFilterTag> ProductFilterTags { get; set; } = new List<ProductFilterTag>();
     }
 
 
@@ -35,11 +36,9 @@ namespace Entities.Entities
     {
         public override void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasOne<Seller>().WithMany(x => x.Products).HasForeignKey(x => x.SellerId);
-
+            builder.HasOne(x => x.Seller).WithMany(x => x.Products).HasForeignKey(x => x.SellerId);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Description).IsRequired(false);
-            builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.DefaultImageUri).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.TotalSold).IsRequired();

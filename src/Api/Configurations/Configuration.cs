@@ -12,7 +12,7 @@ public static class Configuration
                .AddEndpointsApiExplorer()
                .AddSwaggerGen();
 
-        builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+        //builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         // Automatically register MediatR and all command/query handlers in the assembly
         builder.Services.AddMediatR(cfg =>
